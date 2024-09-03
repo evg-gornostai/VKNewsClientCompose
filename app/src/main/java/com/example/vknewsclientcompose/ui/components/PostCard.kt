@@ -44,7 +44,10 @@ import com.example.vknewsclientcompose.ui.theme.VKNewsClientComposeTheme
 fun PostCard(
     modifier: Modifier = Modifier,
     feedPost: FeedPost,
-    onStatisticItemClickListener: (StatisticItem) -> Unit
+    onViewsClickListener: (StatisticItem) -> Unit,
+    onSharesClickListener: (StatisticItem) -> Unit,
+    onCommentsClickListener: (StatisticItem) -> Unit,
+    onLikesClickListener: (StatisticItem) -> Unit,
 ) {
     Card(
         modifier = modifier,
@@ -62,7 +65,10 @@ fun PostCard(
             Content(feedPost = feedPost)
             Statistics(
                 statistics = feedPost.statistics,
-                onItemClickListener = onStatisticItemClickListener,
+                onViewsClickListener = onViewsClickListener,
+                onSharesClickListener = onSharesClickListener,
+                onCommentsClickListener = onCommentsClickListener,
+                onLikesClickListener = onLikesClickListener,
             )
         }
     }
@@ -126,7 +132,10 @@ private fun Content(
 @Composable
 private fun Statistics(
     statistics: List<StatisticItem>,
-    onItemClickListener: (StatisticItem) -> Unit,
+    onViewsClickListener: (StatisticItem) -> Unit,
+    onSharesClickListener: (StatisticItem) -> Unit,
+    onCommentsClickListener: (StatisticItem) -> Unit,
+    onLikesClickListener: (StatisticItem) -> Unit,
 ) {
     Row {
         Row(
@@ -136,36 +145,28 @@ private fun Statistics(
             IconWithText(
                 icon = Icons.Outlined.Person,
                 text = viewsItem.value.toString(),
-                onItemClickListener = {
-                    onItemClickListener(viewsItem)
-                }
+                onItemClickListener = { onViewsClickListener(viewsItem) }
             )
         }
         val sharesItem = statistics.findItemByType(StatisticType.SHARES)
         IconWithText(
             icon = Icons.Outlined.Share,
             text = sharesItem.value.toString(),
-            onItemClickListener = {
-                onItemClickListener(sharesItem)
-            }
+            onItemClickListener = { onSharesClickListener(sharesItem) }
         )
         Spacer(modifier = Modifier.width(16.dp))
         val commentsItem = statistics.findItemByType(StatisticType.COMMENTS)
         IconWithText(
             icon = Icons.Outlined.MailOutline,
             text = commentsItem.value.toString(),
-            onItemClickListener = {
-                onItemClickListener(commentsItem)
-            }
+            onItemClickListener = { onCommentsClickListener(commentsItem) }
         )
         Spacer(modifier = Modifier.width(16.dp))
         val likesItem = statistics.findItemByType(StatisticType.LIKES)
         IconWithText(
             icon = Icons.Outlined.FavoriteBorder,
             text = likesItem.value.toString(),
-            onItemClickListener = {
-                onItemClickListener(likesItem)
-            }
+            onItemClickListener = { onLikesClickListener(likesItem) }
         )
     }
 }

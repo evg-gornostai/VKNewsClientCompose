@@ -3,6 +3,7 @@ package com.example.vknewsclientcompose.domain.entity
 import com.example.vknewsclientcompose.R
 
 data class FeedPost(
+    val id: Int,
     val communityName: String = "communityName",
     val publicationDate: String= "publicationDate",
     val avatarResId: Int = R.drawable.post_comunity_thumbnail,
