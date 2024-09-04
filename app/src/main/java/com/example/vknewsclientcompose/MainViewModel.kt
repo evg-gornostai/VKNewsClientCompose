@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.vknewsclientcompose.domain.entity.FeedPost
 import com.example.vknewsclientcompose.domain.entity.StatisticItem
+import com.example.vknewsclientcompose.ui.entity.NavigationItem
 
 class MainViewModel : ViewModel() {
     private val posts = buildList {
